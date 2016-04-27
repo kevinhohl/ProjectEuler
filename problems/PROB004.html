@@ -24,7 +24,9 @@
                     test_value: numDigits,
                     test_answer: largestPalindromeProduct
                 },
-                success: function(data){console.log(data);} // debug
+                success: function(data) {
+                    document.getElementById("totalRuns").innerHTML = "Total Runs: "+ data
+                }
             });
         }
     </script>
@@ -60,13 +62,14 @@
                 <p>Find the largest palindrome made from the product of two
                 <input id="inputValue" type="number" name="inputValue" min="1" max="7" value="3" required>
                 -digit numbers.
-                <!-- set a maximum of 7-digits so as not to hit the 53-bit JavaScript maximum number -->
+                <!-- set a maximum of 6-digits so as not to hit the 53-bit JavaScript maximum number -->
                 <input id="solutionSubmit" type="submit" value="Submit" >
                 </p>
             </form>
             <p id="solution_p"></p>
-            <p id="elapsedTime"></p>
+            <span title="The total number of times this specific value and result pair has been calculated"><p id="totalRuns"></p></span>
         </div>
+        <p id="elapsedTime"></p>
     </div>
     </body>
 </html>

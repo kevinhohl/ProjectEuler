@@ -7,7 +7,6 @@ include(dirname(__FILE__)."/Solution.php");
 session_start();
 
 if (!isset($_SESSION['Solution'])){
-    echo 'in isset ';
    $_SESSION['Solution'] = new Solution();
 }
 $class = $_SESSION['Solution']; 
@@ -18,7 +17,9 @@ $test_answer = $_POST['test_answer'];
 
 // Record the Test Problem
 if (!empty($problem_id) && !empty($test_value) && !empty($test_answer)) {
-    $class->recordSolution($problem_id, $test_value, $test_answer);
+    $total_runs = $class->recordSolution($problem_id, $test_value, $test_answer);
 }
+
+echo json_encode($total_runs);
 session_destroy();
 ?>

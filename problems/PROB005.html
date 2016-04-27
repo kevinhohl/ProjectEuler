@@ -24,7 +24,9 @@
                     test_value: multipleMaxRange,
                     test_answer: smallestMultiple
                 },
-                success: function(data){console.log(data);} // debug
+                success: function(data) {
+                    document.getElementById("totalRuns").innerHTML = "Total Runs: "+ data
+                }
             });
         }
     </script>
@@ -64,8 +66,9 @@
                 </p>
             </form>
             <p id="solution_p"></p>
-            <p id="elapsedTime"></p>
+            <span title="The total number of times this specific value and result pair has been calculated"><p id="totalRuns"></p></span>
         </div>
+        <p id="elapsedTime"></p>
     </div>
     </body>
 </html>
