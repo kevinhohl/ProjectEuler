@@ -1,0 +1,71 @@
+<html>
+    <head>
+    <title>Smallest Multiple - Project Euler Problem Implementations by Kevin Hohl</title>
+    <link rel="stylesheet" type="text/css" href="/scripts/css/style.css" />
+    <script type="text/javascript" src="/scripts/js/smallestMultiple.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        function formSubmit() {
+            var multipleMaxRange = parseInt(document.forms["SolutionForm"]["inputValue"].value);
+            var startTime = new Date().getTime();
+            smallestMultiple = calculateSmallestMultiple(multipleMaxRange);
+            var endTime = new Date().getTime();
+            var elapsedTime = (endTime-startTime)/1000;
+            document.getElementById("solution_p").innerHTML  = "The the smallest positive number that is evenly divisible by all of the numbers from 1 to "+multipleMaxRange+" is: <b>" + smallestMultiple + "</b><br>";
+            document.getElementById("elapsedTime").innerHTML = "This took <b>"+elapsedTime+"</b> seconds to calculate.";
+
+            // AJAX call to update the DB
+            $.ajax({
+                url: '/scripts/php/recordSolution.php',
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    problem_id: 'PROB005',
+                    test_value: multipleMaxRange,
+                    test_answer: smallestMultiple
+                },
+                success: function(data){console.log(data);} // debug
+            });
+        }
+    </script>
+    </head>
+    <body>
+    <div id="navbar">
+        <ul class="navlist">
+          <li><a href="/">Home</a></li>
+          <li>
+            <div class="dropdown">
+                <a class="activeMenu dropbtn">Problems</a>
+                <div class="dropdown-content">
+                    <a href="/problems/PROB003.html">Largest Prime Factor</a>
+                    <a href="/problems/PROB004.html">Largest Palindrome Product</a>
+                    <a href="/problems/PROB005.html">Smallest Multiple</a>
+                </div>
+            </div>
+          </li>
+        </ul>
+    </div>
+    <div id="content">
+        <h2>Smallest Multiple</h2>
+        <br>
+        <h3>Problem</h3>
+        <div class="problemBox" >
+            <p>2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.</p>
+            <p>What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?</p>
+        </div>
+        <br><br>
+        <h3>Solution</h3>
+        <div class="solutionBox" >
+            <form name="SolutionForm" onSubmit="event.preventDefault(); formSubmit()" method="post" style="margin: 0; padding: 0;">
+                <p>Find the smallest positive number that is evenly divisible by all of the numbers from 1 to
+                <input is="inputValue" type="number" name="inputValue" min="1" max="42" value="20" required>
+                <!-- 42 was found to be the highest possible number for which an accurate smallest multiple would still be returned before running into the 53bit JavaScript limitation, without having to implement large number libraries (possible future enhancement) -->
+                <input id="solutionSubmit" type="submit" value="Submit" >
+                </p>
+            </form>
+            <p id="solution_p"></p>
+            <p id="elapsedTime"></p>
+        </div>
+    </div>
+    </body>
+</html>

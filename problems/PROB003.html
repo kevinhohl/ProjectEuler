@@ -1,0 +1,71 @@
+<html>
+    <head>
+    <title>Largest Prime Factor - Project Euler Problem Implementations by Kevin Hohl</title>
+    <link rel="stylesheet" type="text/css" href="/scripts/css/style.css" />
+    <script type="text/javascript" src="/scripts/js/largestPrimeFactor.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script type="text/javascript">
+        function formSubmit() {
+            var numToFactor = document.forms["SolutionForm"]["inputValue"].value;
+            var startTime = new Date().getTime();
+            var largestPrime = calculateLargestPrimeFactor(numToFactor);
+            var endTime = new Date().getTime();
+            var elapsedTime = (endTime-startTime)/1000;
+            document.getElementById("solution_p").innerHTML  = "The Largest Prime Factor of the number "+numToFactor+" is: <b>" + largestPrime + "</b><br>";
+            document.getElementById("elapsedTime").innerHTML = "This took <b>"+elapsedTime+"</b> seconds to calculate.";
+
+            // AJAX call to update the DB
+            $.ajax({
+                url: '/scripts/php/recordSolution.php',
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    problem_id: 'PROB003',
+                    test_value: numToFactor,
+                    test_answer: largestPrime
+                },
+                success: function(data){console.log(data);} // debug
+            });
+        }
+    </script>
+    </head>
+    <body>
+    <div id="navbar">
+        <ul class="navlist">
+          <li><a href="/">Home</a></li>
+          <li>
+            <div class="dropdown">
+                <a class="activeMenu dropbtn">Problems</a>
+                <div class="dropdown-content">
+                    <a href="/problems/PROB003.html">Largest Prime Factor</a>
+                    <a href="/problems/PROB004.html">Largest Palindrome Product</a>
+                    <a href="/problems/PROB005.html">Smallest Multiple</a>
+                </div>
+            </div>
+          </li>
+        </ul>
+    </div>
+    <div id="content">
+        <h2>Largest Prime Factor</h2>
+        <br>
+        <h3>Problem</h3>
+        <div class="problemBox" >
+            <p>The prime factors of 13195 are 5, 7, 13 and 29.</p>
+            <p>What is the largest prime factor of the number 600851475143 ?</p>
+        </div>
+        <br><br>
+        <h3>Solution</h3>
+        <div class="solutionBox" >
+            <form name="SolutionForm" onSubmit="event.preventDefault(); formSubmit()" method="post" style="margin: 0; padding: 0;">
+                <p>What is the largest prime factor of the number
+                <input id="inputValue" type="number" name="inputValue" min="1" max="9007199254740992" value="600851475143" required>
+                <!-- using maximum value of 9007199254740992 due to this being the largest integer (53bits) JavaScript can "precisely" compute without implementing external large number libraries (possible future enhancement) -->
+                <input id="solutionSubmit" type="submit" value="Submit" >
+                </p>
+            </form>
+            <p id="solution_p"></p>
+            <p id="elapsedTime"></p>
+        </div>
+    </div>
+    </body>
+</html>

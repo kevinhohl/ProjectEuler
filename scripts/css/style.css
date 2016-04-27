@@ -1,0 +1,91 @@
+/* main content CSS */
+body {
+    font-family: "Trebuchet MS", sans-serif;
+}
+#content {
+    margin: 0 auto;
+    padding-top: 100;
+    max-width: 1000px;
+}
+h2 {
+    margin: 0;
+    color: #333;
+    padding: 10px 0 5px 0;
+    font-family: Arial,helvetic,sans-serif;
+}
+h3 {
+    color: #666;
+    margin: 0;
+    font-family: "Courier New", monospace;
+}
+
+/* Problem / Solution CSS */
+.problemBox, .solutionBox {
+    padding:10px;
+    background-color:#fff;
+    border-top:solid 1px #ddd;
+    border-left:solid 1px #ddd;
+    border-right:solid 2px #aaa;
+    border-bottom:solid 2px #aaa;
+}
+#elapsedTime {
+    font-size:80%;
+}
+#inputValue, #solutionSubmit {
+    display:inline;
+}
+
+/* Menu CSS */
+ul.navlist {
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    position: fixed;
+    list-style-type: none;
+    background-color: #666;
+}
+li {
+    float: left;
+}
+li a {
+    color: white;
+    display: block;
+    padding: 14px 16px;
+    text-align: center;
+    text-decoration: none;
+}
+li a:hover {
+    background-color: #111;
+}
+.activeMenu {
+    background-color: #333;
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    min-width: 250px;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+.dropdown-content a {
+    color: black;
+    display: block;
+    text-align: left;
+    padding: 12px 16px;
+    text-decoration: none;
+}
+.dropdown-content a:hover {
+    background-color: #f0f0f0
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown:hover .dropbtn {
+    background-color: #111;
+}
